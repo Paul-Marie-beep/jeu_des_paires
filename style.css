@@ -94,6 +94,8 @@ main {
   padding: 0.5rem;
   border-radius: 6px;
   margin-right: 2%;
+  width: 10rem;
+  font-size: 1.5rem;
 }
 
 .level-btn-dur {
@@ -120,9 +122,10 @@ main {
   width: 18rem;
   height: 6rem;
   border-radius: 20px;
-  position: absolute;
-  top: -12rem;
+  position: fixed;
+  top: 3rem;
   right: 1rem;
+  z-index: 4;
 }
 
 .timer-text {
@@ -202,4 +205,17 @@ main {
 }
 .restart-button:hover {
   cursor: pointer;
+}
+
+.explo {
+  width: min-content;
+  position: fixed;
+  top: 7%;
+  left: 25%;
+  width: 50%;
+}
+
+.boum {
+  transform: scale(1.7);
+  transition: transform 4s ease;
 }

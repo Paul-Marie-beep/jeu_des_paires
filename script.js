@@ -12,9 +12,8 @@ const labelTimer = document.querySelector(".timer");
 const defeatPopup = document.querySelector(".endgame-defeat");
 const defeatbtn = document.querySelector(".defeat-popup-btn");
 const levelPopup = document.querySelector(".popup-level");
-const btnDur = document.querySelector(".level-btn-dur");
-const btnTresDur = document.querySelector(".level-btn-tres-dur");
-const btnImpossible = document.querySelector(".level-btn-impossible");
+const explosion = document.querySelector(".img-explo");
+const exploDiv = document.querySelector(".explo");
 
 let visiblePicCounter = 0;
 let cardValueOne;
@@ -46,6 +45,7 @@ const initGame = function () {
   endGame.classList.add("hidden");
   defeatPopup.classList.add("hidden");
   levelPopup.classList.add("hidden");
+  exploDiv.classList.add("hidden");
   document.removeEventListener("keydown", reloadPage);
   document.removeEventListener("keydown", startGame);
 };
@@ -67,7 +67,7 @@ const levelImpliesTime = function (e) {
     time = 60;
     startGame(60);
   } else if (e.target.classList.contains("level-btn-impossible")) {
-    startGame(25);
+    startGame(5);
   }
 };
 // Commencer à jouer en appuyant sur le bouton du popup
@@ -148,15 +148,21 @@ const victory = function () {
   }, 1500);
 };
 
+// Mettre fin au jeu si on dépasse le temps imparti
 const defeat = function () {
+  hideAllCards();
+  hideTimer();
+  exploDiv.classList.remove("hidden");
   setTimeout(() => {
-    hideAllCards();
-    hideTimer();
+    explosion.classList.add("boum");
+  }, 100);
+  setTimeout(() => {
     clearInterval(countdown);
     defeatPopup.classList.remove("hidden");
     defeatbtn.addEventListener("click", reloadPage);
     document.addEventListener("keydown", reloadPage);
-  }, 900);
+    exploDiv.classList.add("hidden");
+  }, 4100);
 };
 
 // Processus global du jeu
