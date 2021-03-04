@@ -14,6 +14,7 @@ const defeatbtn = document.querySelector(".defeat-popup-btn");
 const levelPopup = document.querySelector(".popup-level");
 const explosion = document.querySelector(".img-explo");
 const exploDiv = document.querySelector(".explo");
+const exploSound = new Audio("sounds/explo.mp3");
 
 let visiblePicCounter = 0;
 let cardValueOne;
@@ -155,6 +156,7 @@ const defeat = function () {
   exploDiv.classList.remove("hidden");
   setTimeout(() => {
     explosion.classList.add("boum");
+    exploSound.play();
   }, 100);
   setTimeout(() => {
     clearInterval(countdown);
