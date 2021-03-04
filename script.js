@@ -7,12 +7,14 @@ const restartButton = document.querySelector(".restart-button");
 const popupStart = document.querySelector(".popup-start");
 const endGame = document.querySelector(".endgame");
 
-const pourBosser = 10;
+const pourBosser = 1;
 
 let visiblePicCounter = 0;
 let cardValueOne;
 let cardValueTwo;
 let cardsLeft = pourBosser;
+
+let cardBackValueOnes = document.querySelectorAll(`.${cardValueOne}-cardback`);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -24,15 +26,18 @@ const initGame = function () {
     div.classList.add("hidden");
   });
   endGame.classList.add("hidden");
+  document.removeEventListener("keydown", reloadPage);
 };
 
 // Commencer à jouer en appuyant sur le bouton du popup
 const startGame = function (e) {
   e.preventDefault();
+  console.log(e);
   cardsContainers.forEach((div) => {
     div.classList.remove("hidden");
     popupStart.classList.add("hidden");
   });
+  document.removeEventListener("keydown", startGame);
 };
 
 // Retourner deux cartes
@@ -106,7 +111,14 @@ const playGame = function (e) {
 
   if (cardsLeft === 0) {
     finishGame();
+    restartButton.addEventListener("click", reloadPage);
+    document.addEventListener("keydown", reloadPage);
   }
+};
+
+// Reload Page
+const reloadPage = function () {
+  document.location.reload();
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,13 +127,9 @@ const playGame = function (e) {
 // Popup au début
 initGame();
 
-// Appui bouton start
+// Appui bouton start ou press enter
 startButton.addEventListener("click", startGame);
+document.addEventListener("keydown", startGame);
 
 // Révéler la carte quand on clique dessus
 wrapper.addEventListener("click", playGame);
-
-// Bouton restart
-restartButton.addEventListener("click", function () {
-  document.location.reload();
-});
