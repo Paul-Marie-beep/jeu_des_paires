@@ -42,11 +42,9 @@ const getResult = function (e, visiblePicCounter) {
   if (visiblePicCounter === 1) {
     cardValueOne = e.target.closest(".card-container").querySelector(".cardpic")
       .dataset.ident;
-    console.log(cardValueOne);
   } else if (visiblePicCounter === 2) {
     cardValueTwo = e.target.closest(".card-container").querySelector(".cardpic")
       .dataset.ident;
-    console.log(cardValueTwo);
   }
   return [visiblePicCounter, cardValueOne, cardValueTwo];
 };
@@ -85,10 +83,9 @@ const finishGame = function () {
   }, 1500);
 };
 
-// Processur global du jeu
+// Processus global du jeu
 const playGame = function (e) {
   e.preventDefault();
-  console.log(e.target);
   if (e.target.classList.contains("cardback") && visiblePicCounter < 2) {
     [visiblePicCounter, cardValueOne, cardValueTwo] = getResult(
       e,
