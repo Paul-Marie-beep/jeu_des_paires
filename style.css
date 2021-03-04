@@ -1,0 +1,127 @@
+body {
+  margin: 0px;
+  background: linear-gradient(to top left, #18ceee, #5577e6);
+  position: relative;
+}
+
+main {
+  margin-top: 20%;
+}
+
+/*
+.shadow {
+  background:
+          linear-gradient(
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)
+  );
+} */
+
+.popup-start {
+  width: 60%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.starter {
+  background-color: white;
+  border: 2px solid darkblue;
+  width: 90%;
+  margin: auto;
+}
+
+.starter p {
+  font-size: 5rem;
+  font-weight: 800;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #5577e6;
+  margin: auto;
+  margin-top: 2%;
+  width: 90%;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+.start-button {
+  background-color: royalblue;
+  color: white;
+  border: 2px solid darkblue;
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin-right: 2%;
+}
+.start-button:hover {
+  cursor: pointer;
+}
+
+.card-container {
+  /* border: 2px solid red; */
+  position: relative;
+  width: min-content;
+  height: 16rem;
+}
+
+.card-container:hover {
+  transform: scale(1.1);
+}
+
+.cardpick {
+  margin-right: 0px;
+}
+
+.cardback {
+  margin-left: 0px;
+  transform: translateY(-102%);
+  z-index: 1;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  width: 80%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.hidden {
+  display: none;
+}
+
+.endgame {
+  position: fixed;
+  top: 45%;
+  width: 100%;
+}
+
+.endgame-message {
+  background-color: white;
+  margin: auto;
+  width: 80%;
+}
+.endgame p {
+  font-size: 5rem;
+  font-weight: 800;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: red;
+  width: 90%;
+  margin: auto;
+}
+
+.restart-button {
+  background-color: red;
+  color: white;
+  border: 2px solid rgb(119, 15, 15);
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 2%;
+  width: 20%;
+}
+.restart-button:hover {
+  cursor: pointer;
+}
