@@ -7,7 +7,7 @@ const restartButton = document.querySelector(".restart-button");
 const popupStart = document.querySelector(".popup-start");
 const endGame = document.querySelector(".endgame");
 
-const pourBosser = 1;
+const pourBosser = 10;
 
 let visiblePicCounter = 0;
 let cardValueOne;

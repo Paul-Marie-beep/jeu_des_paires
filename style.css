@@ -86,7 +86,6 @@ main {
   width: min-content;
   margin: auto;
   margin-top: 10%;
-  border: 2px solid red;
 }
 
 .hidden {
