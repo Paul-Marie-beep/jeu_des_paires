@@ -21,7 +21,10 @@ let cardValueOne;
 let cardValueTwo;
 let cardsLeft = 10;
 let countdown;
+let blink;
 let time;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -67,7 +70,7 @@ const levelImpliesTime = function (e) {
   if (e.target.classList.contains("level-btn-dur")) {
     startGame(120);
   } else if (e.target.classList.contains("level-btn-tres-dur")) {
-    startGame(60);
+    startGame(20);
   } else if (e.target.classList.contains("level-btn-impossible")) {
     startGame(5);
   }
@@ -82,6 +85,9 @@ const startGame = function (time) {
   wrapper.addEventListener("click", playGame);
   defeatPopup.classList.add("hidden");
   countdown = startEndGameTimer(time);
+  setTimeout(() => {
+    blink = makeBackgroundblink();
+  }, (3 / 4) * time * 1000 - 2000);
 };
 
 // Timer pour fin du jeu
@@ -95,10 +101,25 @@ const startEndGameTimer = function (time) {
     }
     time--;
   };
-  // Set timer to 2 minutes.
   tic();
-  const timer = setInterval(tic, 1000);
-  return timer;
+
+  const timeLeft = setInterval(tic, 1000);
+  return timeLeft;
+};
+
+// Faire clignoter la fond quand on s'approche de la fin du temps imparti
+const makeBackgroundblink = function () {
+  const tac = function () {
+    document.body.style.background =
+      "linear-gradient(to top left, #fa2c2c, #bb0f09)";
+    setTimeout(() => {
+      document.body.style.background =
+        "linear-gradient(to top left, #fa2c2c, #850a06)";
+    }, 1000);
+  };
+
+  const blinkleft = setInterval(tac, 2000);
+  return blinkleft;
 };
 
 // Retourner deux cartes
@@ -145,6 +166,8 @@ const badPairingReturnCards = function (cardValueOne, cardValueTwo) {
 // Mettre fin au jeu si on a trouvé toutes les cartes
 const victory = function () {
   setTimeout(() => {
+    document.body.style.background =
+      "linear-gradient(to top left, #18ceee, #5577e6)";
     endGame.classList.remove("hidden");
     hideTimer();
     clearInterval(countdown);
@@ -158,6 +181,9 @@ const defeat = function () {
   hideAllCards();
   hideTimer();
   clearInterval(countdown);
+  clearInterval(blink);
+  document.body.style.background =
+    "linear-gradient(to top left, #fa2c2c, #bb0f09)";
   exploDiv.classList.remove("hidden");
   setTimeout(() => {
     explosion.classList.add("boum");
@@ -191,7 +217,6 @@ const playGame = function (e) {
       );
     }
   }
-
   if (cardsLeft === 0) {
     victory();
   }
