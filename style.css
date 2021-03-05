@@ -48,12 +48,14 @@ main {
   margin-bottom: 2%;
 }
 .start-button {
-  background-color: royalblue;
+  background-color: rgb(240, 25, 175);
   color: white;
   border: 2px solid darkblue;
   padding: 0.5rem;
   border-radius: 10px;
   margin-right: 2%;
+  font-size: 1.5rem;
+  width: 5rem;
 }
 .start-button:hover {
   cursor: pointer;

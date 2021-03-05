@@ -49,6 +49,8 @@ const initGame = function () {
   exploDiv.classList.add("hidden");
   document.removeEventListener("keydown", reloadPage);
   document.removeEventListener("keydown", startGame);
+  startButton.addEventListener("click", choseLevel);
+  document.addEventListener("keydown", choseLevel);
 };
 
 // Chosir son niveau
@@ -56,16 +58,15 @@ const initGame = function () {
 const choseLevel = function () {
   popupStart.classList.add("hidden");
   levelPopup.classList.remove("hidden");
+  levelPopup.addEventListener("click", levelImpliesTime);
   document.removeEventListener("keydown", choseLevel);
 };
 
 const levelImpliesTime = function (e) {
   e.preventDefault();
   if (e.target.classList.contains("level-btn-dur")) {
-    time = 120;
     startGame(120);
   } else if (e.target.classList.contains("level-btn-tres-dur")) {
-    time = 60;
     startGame(60);
   } else if (e.target.classList.contains("level-btn-impossible")) {
     startGame(5);
@@ -78,6 +79,7 @@ const startGame = function (time) {
   cardsContainers.forEach((div) => {
     div.classList.remove("hidden");
   });
+  wrapper.addEventListener("click", playGame);
   defeatPopup.classList.add("hidden");
   countdown = startEndGameTimer(time);
 };
@@ -146,6 +148,8 @@ const victory = function () {
     endGame.classList.remove("hidden");
     hideTimer();
     clearInterval(countdown);
+    restartButton.addEventListener("click", reloadPage);
+    document.addEventListener("keydown", reloadPage);
   }, 1500);
 };
 
@@ -153,13 +157,13 @@ const victory = function () {
 const defeat = function () {
   hideAllCards();
   hideTimer();
+  clearInterval(countdown);
   exploDiv.classList.remove("hidden");
   setTimeout(() => {
     explosion.classList.add("boum");
     exploSound.play();
   }, 100);
   setTimeout(() => {
-    clearInterval(countdown);
     defeatPopup.classList.remove("hidden");
     defeatbtn.addEventListener("click", reloadPage);
     document.addEventListener("keydown", reloadPage);
@@ -190,8 +194,6 @@ const playGame = function (e) {
 
   if (cardsLeft === 0) {
     victory();
-    restartButton.addEventListener("click", reloadPage);
-    document.addEventListener("keydown", reloadPage);
   }
 };
 
@@ -201,17 +203,6 @@ const reloadPage = function () {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Functions calls
-/////////////////////////////////
-// Popup au début
+// Functions call
+
 initGame();
-
-// Appui bouton start ou press enter
-startButton.addEventListener("click", choseLevel);
-document.addEventListener("keydown", choseLevel);
-
-// Révéler la carte quand on clique dessus
-wrapper.addEventListener("click", playGame);
-
-//Popup choisir le level : actions sur les boutons
-levelPopup.addEventListener("click", levelImpliesTime);
