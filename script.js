@@ -52,30 +52,40 @@ const initGame = function () {
   exploDiv.classList.add("hidden");
   document.removeEventListener("keydown", reloadPage);
   document.removeEventListener("keydown", startGame);
-  startButton.addEventListener("click", choseLevel);
-  document.addEventListener("keydown", choseLevel);
+  startButton.addEventListener("click", choseLevelClick);
+  document.addEventListener("keydown", choseLevelEnter);
 };
 
 // Chosir son niveau
 
-const choseLevel = function () {
+const choseLevelClick = function () {
   popupStart.classList.add("hidden");
   levelPopup.classList.remove("hidden");
   levelPopup.addEventListener("click", levelImpliesTime);
-  document.removeEventListener("keydown", choseLevel);
+  document.removeEventListener("keydown", choseLevelEnter);
 };
 
+const choseLevelEnter = function (e) {
+  if (e.code === "Enter") {
+    popupStart.classList.add("hidden");
+    levelPopup.classList.remove("hidden");
+    levelPopup.addEventListener("click", levelImpliesTime);
+    document.removeEventListener("keydown", choseLevelEnter);
+    document.removeEventListener("keydown", choseLevelClick);
+  }
+};
+// Assigner un temps imparti en fonction du niveau choisi.
 const levelImpliesTime = function (e) {
   e.preventDefault();
   if (e.target.classList.contains("level-btn-dur")) {
     startGame(120);
   } else if (e.target.classList.contains("level-btn-tres-dur")) {
-    startGame(20);
+    startGame(60);
   } else if (e.target.classList.contains("level-btn-impossible")) {
-    startGame(5);
+    startGame(10);
   }
 };
-// Commencer à jouer en appuyant sur le bouton du popup
+// Commencer à jouer en appuyant sur le bouton du popup de choix du level
 const startGame = function (time) {
   levelPopup.classList.add("hidden");
   timer.classList.remove("hidden");
@@ -165,12 +175,13 @@ const badPairingReturnCards = function (cardValueOne, cardValueTwo) {
 
 // Mettre fin au jeu si on a trouvé toutes les cartes
 const victory = function () {
+  clearInterval(blink);
+  clearInterval(countdown);
   setTimeout(() => {
     document.body.style.background =
-      "linear-gradient(to top left, #18ceee, #5577e6)";
+      "linear-gradient(to top left, #18ee23, #069229)";
     endGame.classList.remove("hidden");
     hideTimer();
-    clearInterval(countdown);
     restartButton.addEventListener("click", reloadPage);
     document.addEventListener("keydown", reloadPage);
   }, 1500);
@@ -228,6 +239,6 @@ const reloadPage = function () {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Functions call
+// Function call
 
 initGame();

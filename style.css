@@ -14,12 +14,12 @@ main {
   position: fixed;
   top: 30%;
   left: 5%;
-}
-
-.starter {
   background-color: white;
   border: 2px solid darkblue;
   width: 90%;
+}
+
+.starter {
   margin: auto;
 }
 
