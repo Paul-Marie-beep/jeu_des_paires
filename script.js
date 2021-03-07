@@ -110,11 +110,10 @@ const choseLevelClick = function () {
 
 const choseLevelEnter = function (e) {
   if (e.code === "Enter") {
-    popupStart.classList.add("hidden");
-    levelPopup.classList.remove("hidden");
+    hideStartPopup();
+    showLevelChoicePopup();
     levelPopup.addEventListener("click", levelImpliesTime);
     document.removeEventListener("keydown", choseLevelEnter);
-    document.removeEventListener("keydown", choseLevelClick);
   }
 };
 // Assigner un temps imparti en fonction du niveau choisi.
@@ -232,11 +231,11 @@ const victory = function () {
 const defeat = function () {
   hideAllCards();
   hideTimer();
+  showExplosion();
   clearInterval(countdown);
   clearInterval(blink);
   document.body.style.background =
     "linear-gradient(to top left, #fa2c2c, #bb0f09)";
-  showExplosion();
   setTimeout(() => {
     explosion.classList.add("boum");
     exploSound.play();
