@@ -27,29 +27,72 @@ let time;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Functions
 ///////////////////////////
-// Helper
+// Helpers
 /////////////////
-// Cacher toutes les cartes
 const hideAllCards = function () {
   cardsContainers.forEach((div) => {
     div.classList.add("hidden");
   });
 };
+
+const showAllCards = function () {
+  cardsContainers.forEach((div) => {
+    div.classList.remove("hidden");
+  });
+};
+
 const hideTimer = function () {
   timer.classList.add("hidden");
 };
-/////////////////
+
+const hideVictoryPopup = function () {
+  endGame.classList.add("hidden");
+};
+
+const hideDefeatPopup = function () {
+  defeatPopup.classList.add("hidden");
+};
+
+const showDefeatPopup = function () {
+  defeatPopup.classList.remove("hidden");
+};
+
+const showLevelChoicePopup = function () {
+  levelPopup.classList.remove("hidden");
+};
+
+const hideLevelChoicePopup = function () {
+  levelPopup.classList.add("hidden");
+};
+
+const hideStartPopup = function () {
+  popupStart.classList.add("hidden");
+};
+
+const showTimer = function () {
+  timer.classList.remove("hidden");
+};
+
+const showExplosion = function () {
+  exploDiv.classList.remove("hidden");
+};
+
+const hideExplosion = function () {
+  exploDiv.classList.add("hidden");
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Functions
 
 // initialiser le jeu
 const initGame = function () {
   hideAllCards();
   hideTimer();
-  endGame.classList.add("hidden");
-  defeatPopup.classList.add("hidden");
-  levelPopup.classList.add("hidden");
-  exploDiv.classList.add("hidden");
+  hideVictoryPopup();
+  hideDefeatPopup();
+  hideLevelChoicePopup();
   document.removeEventListener("keydown", reloadPage);
   document.removeEventListener("keydown", startGame);
   startButton.addEventListener("click", choseLevelClick);
@@ -59,8 +102,8 @@ const initGame = function () {
 // Chosir son niveau
 
 const choseLevelClick = function () {
-  popupStart.classList.add("hidden");
-  levelPopup.classList.remove("hidden");
+  hideStartPopup();
+  showLevelChoicePopup();
   levelPopup.addEventListener("click", levelImpliesTime);
   document.removeEventListener("keydown", choseLevelEnter);
 };
@@ -87,13 +130,11 @@ const levelImpliesTime = function (e) {
 };
 // Commencer à jouer en appuyant sur le bouton du popup de choix du level
 const startGame = function (time) {
-  levelPopup.classList.add("hidden");
-  timer.classList.remove("hidden");
-  cardsContainers.forEach((div) => {
-    div.classList.remove("hidden");
-  });
+  hideStartPopup();
+  showTimer();
+  hideLevelChoicePopup();
+  showAllCards();
   wrapper.addEventListener("click", playGame);
-  defeatPopup.classList.add("hidden");
   countdown = startEndGameTimer(time);
   setTimeout(() => {
     blink = makeBackgroundblink();
@@ -195,16 +236,16 @@ const defeat = function () {
   clearInterval(blink);
   document.body.style.background =
     "linear-gradient(to top left, #fa2c2c, #bb0f09)";
-  exploDiv.classList.remove("hidden");
+  showExplosion();
   setTimeout(() => {
     explosion.classList.add("boum");
     exploSound.play();
   }, 100);
   setTimeout(() => {
-    defeatPopup.classList.remove("hidden");
+    showDefeatPopup();
+    hideExplosion();
     defeatbtn.addEventListener("click", reloadPage);
     document.addEventListener("keydown", reloadPage);
-    exploDiv.classList.add("hidden");
   }, 4100);
 };
 
