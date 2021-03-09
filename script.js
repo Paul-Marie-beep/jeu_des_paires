@@ -146,8 +146,7 @@ const levelImpliesTime = function (e) {
   } else if (e.target.classList.contains("level-btn-impossible")) {
     startGame(10);
   } else if (e.target.classList.contains("level-btn-simple")) {
-    // startGame(3599);
-    startGame(2);
+    startGame(3599);
   }
 };
 // Commencer à jouer en appuyant sur le bouton du popup de choix du level
