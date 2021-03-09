@@ -67,7 +67,8 @@ main {
 }
 
 .popup-level {
-  width: 90%;
+  width: fit-content;
+  max-width: 95%;
   position: fixed;
   top: 30%;
   left: 5%;
@@ -76,7 +77,6 @@ main {
 .level {
   background-color: white;
   border: 2px solid darkblue;
-  width: 90%;
   margin: auto;
 }
 
@@ -87,6 +87,11 @@ main {
   width: fit-content;
   margin: auto;
   margin-top: 2%;
+}
+
+.gender-choice {
+  width: fit-content;
+  margin: auto;
 }
 
 .buttons {
@@ -115,6 +120,11 @@ main {
 
 .level-btn-impossible {
   background-color: orangered;
+}
+
+.level-btn-simple {
+  background-color: pink;
+  width: fit-content;
 }
 
 .level-btn:hover {

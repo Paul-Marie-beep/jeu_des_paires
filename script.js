@@ -19,6 +19,10 @@ const inputFirstName = document.querySelector(".form__input--name");
 const levelSentence = document.querySelector(".level-text");
 const defeatMessage = document.querySelector(".endgame-defeat-message");
 const victoryMessage = document.querySelector(".endgame-victory-message");
+const levelOptions = document.querySelector(".level-options");
+const inputGender = document.querySelector(".form__input--gender");
+const womanButtons = document.querySelector(".woman-btns");
+const manButtons = document.querySelector(".man-btns");
 
 let visiblePicCounter = 0;
 let cardValueOne;
@@ -28,6 +32,7 @@ let countdown;
 let blink;
 let time;
 let firstName;
+let gender;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,10 +71,15 @@ const hideDefeatPopup = function () {
 };
 
 const showDefeatPopup = function () {
-  let defeatMessageHtml = `<p class= "endgame-message-text">Tu es nul ${firstName} !! Tu as perdu !! </p><p class= "endgame-message-icons">🧨 🪓 </p> `;
+  let terminaison = gender === "woman" ? "le" : "";
+  let defeatMessageHtml = `<p class= "endgame-message-text">Tu es nul${terminaison} ${firstName} !! Tu as perdu !! </p><p class= "endgame-message-icons">🧨 🪓 </p> `;
   defeatMessage.insertAdjacentHTML("afterbegin", defeatMessageHtml);
   defeatPopup.classList.remove("hidden");
-  console.log(firstName);
+};
+
+const toggleGenderLevelOptions = function () {
+  womanButtons.classList.toggle("hidden");
+  manButtons.classList.toggle("hidden");
 };
 
 const showLevelChoicePopup = function () {
@@ -77,6 +87,7 @@ const showLevelChoicePopup = function () {
   firstName = inputFirstName.value;
   let html = `<p class = level-text> Bonjour ${firstName}</p>`;
   levelSentence.insertAdjacentHTML("beforebegin", html);
+  inputGender.addEventListener("change", toggleGenderLevelOptions);
 };
 
 const hideLevelChoicePopup = function () {
@@ -134,10 +145,14 @@ const levelImpliesTime = function (e) {
     startGame(60);
   } else if (e.target.classList.contains("level-btn-impossible")) {
     startGame(10);
+  } else if (e.target.classList.contains("level-btn-simple")) {
+    // startGame(3599);
+    startGame(2);
   }
 };
 // Commencer à jouer en appuyant sur le bouton du popup de choix du level
 const startGame = function (time) {
+  gender = inputGender.value;
   hideStartPopup();
   showTimer();
   hideLevelChoicePopup();

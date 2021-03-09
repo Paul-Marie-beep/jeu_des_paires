@@ -27,11 +27,22 @@
 
       <section class="popup-level">
         <div class="level">
-          <p class="level-text">Choisis ton niveau</p>
-          <div class="buttons">
+          <p class="level-text">Es-tu un homme ou une femme ?</p>
+          <br />
+          <div class="form__row gender-choice">
+            <select class="form__input form__input--gender">
+              <option value="man">Homme</option>
+              <option value="woman">Femme</option>
+            </select>
+          </div>
+          <p class="level-text level-options">Choisis ton niveau :</p>
+          <div class="buttons man-btns">
             <button class="level-btn level-btn-dur">Dur</button>
             <button class="level-btn level-btn-tres-dur">Super dur</button>
             <button class="level-btn level-btn-impossible">Impossible</button>
+          </div>
+          <div class="buttons woman-btns hidden">
+            <button class="level-btn level-btn-simple">Super simple</button>
           </div>
         </div>
       </section>
