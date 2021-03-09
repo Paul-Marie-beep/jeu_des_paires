@@ -15,6 +15,10 @@ const levelPopup = document.querySelector(".popup-level");
 const explosion = document.querySelector(".img-explo");
 const exploDiv = document.querySelector(".explo");
 const exploSound = new Audio("sounds/explo.mp3");
+const inputFirstName = document.querySelector(".form__input--name");
+const levelSentence = document.querySelector(".level-text");
+const defeatMessage = document.querySelector(".endgame-defeat-message");
+const victoryMessage = document.querySelector(".endgame-victory-message");
 
 let visiblePicCounter = 0;
 let cardValueOne;
@@ -23,6 +27,7 @@ let cardsLeft = 10;
 let countdown;
 let blink;
 let time;
+let firstName;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,6 +51,12 @@ const hideTimer = function () {
   timer.classList.add("hidden");
 };
 
+const showVictoryPopup = function () {
+  let victoryMessageHtml = `<p class= "endgame-message-text"> Bravo ${firstName} !! Tu as gagné !! </p> <p class= "endgame-message-icons"> 👯‍♀️ 💉 </p>`;
+  victoryMessage.insertAdjacentHTML("afterbegin", victoryMessageHtml);
+  endGame.classList.remove("hidden");
+};
+
 const hideVictoryPopup = function () {
   endGame.classList.add("hidden");
 };
@@ -55,11 +66,17 @@ const hideDefeatPopup = function () {
 };
 
 const showDefeatPopup = function () {
+  let defeatMessageHtml = `<p class= "endgame-message-text">Tu es nul ${firstName} !! Tu as perdu !! </p><p class= "endgame-message-icons">🧨 🪓 </p> `;
+  defeatMessage.insertAdjacentHTML("afterbegin", defeatMessageHtml);
   defeatPopup.classList.remove("hidden");
+  console.log(firstName);
 };
 
 const showLevelChoicePopup = function () {
   levelPopup.classList.remove("hidden");
+  firstName = inputFirstName.value;
+  let html = `<p class = level-text> Bonjour ${firstName}</p>`;
+  levelSentence.insertAdjacentHTML("beforebegin", html);
 };
 
 const hideLevelChoicePopup = function () {
@@ -95,18 +112,10 @@ const initGame = function () {
   hideLevelChoicePopup();
   document.removeEventListener("keydown", reloadPage);
   document.removeEventListener("keydown", startGame);
-  startButton.addEventListener("click", choseLevelClick);
   document.addEventListener("keydown", choseLevelEnter);
 };
 
 // Chosir son niveau
-
-const choseLevelClick = function () {
-  hideStartPopup();
-  showLevelChoicePopup();
-  levelPopup.addEventListener("click", levelImpliesTime);
-  document.removeEventListener("keydown", choseLevelEnter);
-};
 
 const choseLevelEnter = function (e) {
   if (e.code === "Enter") {
@@ -220,8 +229,8 @@ const victory = function () {
   setTimeout(() => {
     document.body.style.background =
       "linear-gradient(to top left, #18ee23, #069229)";
-    endGame.classList.remove("hidden");
     hideTimer();
+    showVictoryPopup();
     restartButton.addEventListener("click", reloadPage);
     document.addEventListener("keydown", reloadPage);
   }, 1500);

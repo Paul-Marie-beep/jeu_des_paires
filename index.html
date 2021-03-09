@@ -13,9 +13,14 @@
     <div class="app">
       <section class="popup-start">
         <div class="starter">
-          <p>Appuyez sur Start ou sur Entrée pour commencer le jeu</p>
-          <div class="button">
-            <button class="start-button">Start</button>
+          <p>Avant de commencer, répond à cette question capitale:</p>
+          <br />
+          <div class="form__row questionnaire">
+            <label class="form__label label">Quel est ton prénom ?</label>
+            <input
+              class="form__input saisie form__input--name"
+              placeholder="Jean-Mich"
+            />
           </div>
         </div>
       </section>
@@ -320,16 +325,14 @@
         </div>
       </main>
       <section class="endgame">
-        <div class="endgame-message">
-          <p>Bravo !! Tu as gagné !! 👯‍♀️ 💉</p>
+        <div class="endgame-victory-message endgame-message">
           <div class="button">
             <button class="restart-button">Start again</button>
           </div>
         </div>
       </section>
       <section class="endgame endgame-defeat">
-        <div class="endgame-message">
-          <p>Tu es nul !! Tu as perdu 🧨🪓</p>
+        <div class="endgame-defeat-message endgame-message">
           <div class="button">
             <button class="restart-button defeat-popup-btn">Start again</button>
           </div>
